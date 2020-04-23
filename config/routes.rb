@@ -8,8 +8,6 @@ Rails.application.routes.draw do
 
   # post("/process_contact", to: "home#process_contact")
 
-
-
-
+  resources :projects
 
 end
