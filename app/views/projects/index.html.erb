@@ -6,10 +6,17 @@
   <div class='col-10'>
     <% @projects.each do |project| %>
     <%# if you pass a instance to link_to it will create the href='/questions/:id' %>
+   
       <%= link_to project do %>
         <li class='list-group-item'>
-          <p><%= project.title %></p>
-          <p><%= project.description %>          due date: <%= project.due_date %></p>
+            <h1>
+                <span class='badge badge-pill badge-info'>
+                    <%= project.id %>
+                </span>
+                    <%= project.title %>
+            </h1>
+    
+            <p><%= project.description %>          due date: <%= project.due_date %></p>
         </li>
       <% end %>
     <% end %>

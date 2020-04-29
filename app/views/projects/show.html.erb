@@ -5,14 +5,10 @@
     </span>
     <%= @project.title %>
   </h1>
-  <li class='list-group-item'>
-          <p><%= @project.title %></p>
-          <p><%= @project.description %>          due date: <%= @project.due_date %></p>
-</li>
   <p class='shadow-none p-3 mb-5 bg-light rounded'><%= @project.description %></p>
-  
+
   <%# link_to arguments: name, path, options_object %>
-  <% if@project %>
+  <% if @project %>
   <div>
     <%= link_to(
       "Edit",
@@ -33,3 +29,45 @@
 </div>
 
 
+<%= form_with(model: [@project, @task], local: true) do |f| %>
+  <% if @task.errors.full_messages.each do |msg| %>
+    <ul>
+      <li class="text-danger"><%= msg %></li>
+    </ul>
+    <% end %>
+  <% end %>
+  <div class="form-group">
+    <%= f.text_area(
+      :body,
+      cols: 50,
+      rows: 5,
+      placeholder: "What are you thoughts?",
+      class: "form-control"
+    ) %>
+  </div>
+  <%= f.submit "task", class: "btn-primary" %>
+<% end %>
+
+<ul class="list-group task-list">
+  <% @tasks.each do |task| %>
+    <li class="list-group-item">
+      <p>
+        <%= task.body %><br />
+        <% if task %>
+        <small>
+          <%= link_to(
+            "Delete",
+            project_task_path(@project, task),
+            method: :delete, 
+            data: {
+              confirm: "Are you sure?"
+            },
+            class: 'btn btn-danger btn-sm',
+          ) %>
+        </small>
+        |
+        <% end %>
+      </p>
+    </li>
+  <% end %>
+</ul>

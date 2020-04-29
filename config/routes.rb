@@ -8,6 +8,13 @@ Rails.application.routes.draw do
 
   # post("/process_contact", to: "home#process_contact")
 
-  resources :projects
+  # resources :projects
+  # resources :tasks
+
+  resources :projects do 
+    resources :tasks, only: [:create, :destroy]
+  end
+
+
 
 end
