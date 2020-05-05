@@ -7,27 +7,30 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
-Project.delete_all 
+
 Task.delete_all 
+Project.delete_all 
 
 NUM_PROJECT = 200
-
+DATE = '19/09/1985'
 
 NUM_PROJECT.times do 
     created_at = Faker::Date.backward(days: 365 * 5)
-    q = Project.create(
+      p = Project.create(
         title: Faker::BossaNova.artist ,
         description: Faker::ChuckNorris.fact,
-        due_date: '19/09/1985',
+        due_date: DATE,
         created_at: created_at,
         updated_at: created_at
     )
-    if q.valid? 
-        q.tasks_id = rand(0..15).times.map do 
+    if p.valid? 
+        p.tasks_id = rand(0..15).times.map do 
           Task.new(
             title: Faker::Hacker.say_something_smart, 
-            body: Faker::GreekPhilosophers.quote,
-            due_date: '19/09/1985'
+            due_date: DATE,
+            created_at: created_at,
+            updated_at: created_at,
+            body: Faker::GreekPhilosophers.quote
           )
         end
     end

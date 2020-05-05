@@ -1,41 +1,41 @@
 class DiscussionsController < ApplicationController
     def index
-        @projects = Project.all.order('updated_at DESC') 
+        @discussions = Discussion.all.order('updated_at DESC') 
     end
 
     def new 
-        @project = Project.new 
+        @discussion = discussion.new 
     end
 
     def create
-        @project = Project.new(params.require(:project).permit(:title, :description, :due_date))
-        if @project.save
-            redirect_to projects_path
+        @discussion = Discussion.new(params.require(:discussion).permit(:title, :description, :due_date))
+        if @discussion.save
+            redirect_to discussions_path
         else
             render :new
         end
     end
 
     def show
-        @project = Project.find(params[:id])
+        @discussion = discussion.find(params[:id])
         @task = Task.new 
-        @tasks = @project.tasks.order(created_at: :desc)
+        @tasks = @discussion.tasks.order(created_at: :desc)
     end
 
     def destroy
-        @project = Project.find(params[:id])
-        @project.destroy
-        redirect_to projects_path
+        @discussion = discussion.find(params[:id])
+        @discussion.destroy
+        redirect_to discussions_path
     end
 
     def edit
-        @project = Project.find(params[:id])
+        @discussion = discussion.find(params[:id])
     end
 
     def update
-        @project = Project.find(params[:id])
-        if @project.update(params.require(:project).permit(:title, :description, :due_date))
-            redirect_to project_path(@project)
+        @discussion = discussion.find(params[:id])
+        if @discussion.update(params.require(:discussion).permit(:title, :description, :due_date))
+            redirect_to discussion_path(@discussion)
         else
             render :edit
         end

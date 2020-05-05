@@ -2,7 +2,7 @@ class TasksController < ApplicationController
 
     def create 
         @project = Project.find(params[:project_id])
-        @task = Task.new task_params
+        @task = Task.new 
         @task.project = @project
         # @task.user = current_user
         if @task.save
@@ -16,7 +16,7 @@ class TasksController < ApplicationController
 
     def destroy 
         @task = Task.find params[:id]
-        if can?(:crud, @task)
+        if @task
             @task.destroy 
             redirect_to project_path(@task.project)
         else 

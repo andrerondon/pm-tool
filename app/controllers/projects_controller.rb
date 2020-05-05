@@ -20,7 +20,7 @@ class ProjectsController < ApplicationController
     def show
         @project = Project.find(params[:id])
         @task = Task.new 
-        @tasks = @project.tasks.order(created_at: :desc)
+        @tasks = Task.all.order(created_at: :desc)
     end
 
     def destroy

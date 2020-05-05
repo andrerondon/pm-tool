@@ -27,23 +27,40 @@
   </div>
   <% end %>
 </div>
-
+ <%# link_to arguments: name, path, options_object %>
 
 <%= form_with(model: [@project, @task], local: true) do |f| %>
   <% if @task.errors.full_messages.each do |msg| %>
     <ul>
       <li class="text-danger"><%= msg %></li>
     </ul>
-    <% end %>
   <% end %>
-  <%= f.submit "task", class: "btn-primary" %>
+    <div>
+        <%= f.label :title %>
+        <%= f.text_field :title %>
+    </div>
+    <div>
+        <%= f.label :description %>
+        <%= f.text_area :body %>
+    </div>
+    <div>
+        <%= f.label :due_date  %>
+        <%= f.date_field :due_date %>
+    </div>
+  <% end %>
+  <%= f.submit "Submit", class: "btn-primary" %>
 <% end %>
 
-<ul class="list-group task-list">
 
+
+ <%# Displaying the tasks %>
+
+
+<ul class="list-group task-list">
   <% @tasks.each do |task| %>
     <li class="list-group-item">
       <p>
+        <%= task.title %><br />
         <%= task.body %><br />
         <% if task %>
         <small>
@@ -63,3 +80,6 @@
     </li>
   <% end %>
 </ul>
+
+
+
